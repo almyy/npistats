@@ -1,0 +1,39 @@
+@import '../../styles/colors';
+
+$link-color: white;
+
+:local(.header) {
+    background-color: $header-color; 
+    height: 6vh;
+    margin-bottom: 2vh;
+    display: flex;
+    align-items: flex-end;
+
+    nav {
+        height: 40px;
+        display: flex;
+        
+        .selected {
+            border-bottom: 3px solid darken($header-active-border, 10);
+            font-weight: bold;    
+        }
+    }
+    a {
+        display: flex;
+        align-items: center;
+        padding: 0 10px;
+        margin-right: 10px;
+        color: white !important;
+        box-sizing: border-box;
+        border-bottom: 3px solid transparent;
+        transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    
+    a:first-of-type {
+        padding-left: 0;
+    }
+
+    a:hover {
+        border-bottom: 3px solid darken($header-active-border, 10);
+    }
+}

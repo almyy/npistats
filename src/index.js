@@ -5,7 +5,8 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
-import './index.css';
+import { BrowserRouter, Route} from 'react-router-dom';
+
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
@@ -19,7 +20,9 @@ const client = new ApolloClient({
 // 4
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    <BrowserRouter>
+      <Route path="/" component={App} />
+    </BrowserRouter>
   </ApolloProvider>,
      document.getElementById('root'));
 registerServiceWorker();

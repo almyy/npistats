@@ -14,7 +14,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var getOwnersForCurrentSeason = exports.getOwnersForCurrentSeason = function getOwnersForCurrentSeason(response, season) {
     var $ = _cheerio2.default.load(response.data);
 
-    var data = $(undefined);
     var teamNames = [];
     var owners = [];
     var ownerIds = [];
@@ -27,8 +26,6 @@ var getOwnersForCurrentSeason = exports.getOwnersForCurrentSeason = function get
         ownerIds.push($(e).attr('class').slice(16));
         owners.push($(e).text());
     });
-
-    // console.log(season, teamNames)
 
     for (var u = 0; u < ownerIds.length; u++) {
         currentSeason.push({

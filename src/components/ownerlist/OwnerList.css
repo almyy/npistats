@@ -1,7 +1,31 @@
-:local(.root) {
-  color: green; }
-
 :local(.ownerList) {
   display: flex;
-  flex-direction: column;
-  border: 1px solid hotpink; }
+  flex-wrap: wrap; }
+
+:local(.owner) {
+  flex: 0 0 42%;
+  height: 15vh;
+  margin: 0 2% 2% 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  padding: 2%;
+  position: relative;
+  transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
+  :local(.owner).winner {
+    background-color: #E8DD8F; }
+  :local(.owner).loser {
+    background-color: #D57575; }
+  :local(.owner):nth-child(-n+2) {
+    margin-top: 15px; }
+  :local(.owner) .aka {
+    position: absolute;
+    bottom: 20px;
+    font-weight: 500; }
+    :local(.owner) .aka .teamNames {
+      display: flex;
+      flex-direction: column; }
+      :local(.owner) .aka .teamNames span {
+        font-size: 0.7rem; }
+  :local(.owner):hover {
+    background-color: #e6e6e6; }

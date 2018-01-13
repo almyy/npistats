@@ -1,10 +1,24 @@
 const resolvers = {
     Query: {
-      allLinks: async (root, data, {mongo: {Links}}) => { 
-        return await Links.find({}).toArray();
-      },
-      allOwners: async (root, data, { mongo: { Owners }}) =>{ 
-          return await Owners.find({}).toArray();
+        allLinks: async (root, data, {mongo: {Links}}) => { 
+            return await Links.find({}).toArray();
+        },
+        allOwners: async (root, data, { mongo: { Owners }}) => { 
+            return await Owners.find({}).toArray();
+        },
+        allGames: async (root, data, { mongo: { Games }}) => {
+            return await Games.find({}).toArray();
+        },
+        gamesByOwnerId: async (root, data, {mongo: { Games }}) => {
+            return await Games.find({
+                $or: [
+                    {awayTeamId: data.ownerId},
+                    {homeTeamId: data.ownerId}
+                ]
+            }).toArray();
+        },
+        ownerByOwnerId: async (root, data, { mongo: {Owners }}) => {
+            return await Owners.findOne({id : data.ownerId});
         }
     },
   

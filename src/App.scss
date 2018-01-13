@@ -1,4 +1,2 @@
-:local(.app) {
-    width: 80%;
-    margin: 0 auto;
-}
+@import './styles/_colors.scss';
+@import './styles/_basic.scss';

@@ -1,0 +1,43 @@
+@import './colors';
+
+body {
+    background-color: $background;
+    font-family: 'Lato', sans-serif;
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+a:hover,
+a:visited {
+    color: $text-color
+}
+
+a {
+    color: $text-color;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+h1 {
+    margin: 0.4rem 0;
+}
+h2 {
+    margin: 0.4rem 0;
+}
+h3 {
+    margin: 0.4rem 0;
+}
+h4 {
+    margin: 0.4rem 0;
+}
+h5 {
+    margin: 0.4rem 0;
+}
+h6 {
+    margin: 0.4rem 0;
+}

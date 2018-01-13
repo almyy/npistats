@@ -10,6 +10,8 @@ var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
 
 var _getAllTeamOwners = require('./scrapi/getAllTeamOwners');
 
+var _getAllGameStatistics = require('./scrapi/getAllGameStatistics');
+
 var _mongoconnector = require('../backend/mongoconnector');
 
 var _mongoconnector2 = _interopRequireDefault(_mongoconnector);
@@ -33,7 +35,7 @@ for (var i = firstYear; i <= currentActiveYear; i++) {
 
 var scrapeForOwners = function () {
     var _ref = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee() {
-        var mongo, owners, cursor, newArr;
+        var mongo, owners, newArr;
         return _regenerator2.default.wrap(function _callee$(_context) {
             while (1) {
                 switch (_context.prev = _context.next) {
@@ -44,7 +46,6 @@ var scrapeForOwners = function () {
                     case 2:
                         mongo = _context.sent;
                         owners = mongo.Owners;
-                        cursor = owners.find({});
                         newArr = Promise.all(Object.keys(seasonMap).map(function (key) {
                             var url = 'http://fantasy.nfl.com/league/2273376/history/' + key + '/owners';
                             return axios.get(url).then(function (response) {
@@ -59,7 +60,7 @@ var scrapeForOwners = function () {
                             });
                         });
 
-                    case 7:
+                    case 6:
                     case 'end':
                         return _context.stop();
                 }
@@ -72,4 +73,40 @@ var scrapeForOwners = function () {
     };
 }();
 
-scrapeForOwners();
+var scrapeForGames = function () {
+    var _ref2 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee2() {
+        var mongo, games, _i;
+
+        return _regenerator2.default.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        _context2.next = 2;
+                        return (0, _mongoconnector2.default)();
+
+                    case 2:
+                        mongo = _context2.sent;
+                        games = mongo.Games;
+
+
+                        for (_i = firstYear; _i <= currentActiveYear; _i++) {
+                            Promise.all((0, _getAllGameStatistics.getGamesForSeason)(_i)).then(function (res) {
+                                var flatArray = Array.prototype.concat.apply([], res);
+                                games.insertMany(flatArray);
+                            });
+                        }
+
+                    case 5:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, undefined);
+    }));
+
+    return function scrapeForGames() {
+        return _ref2.apply(this, arguments);
+    };
+}();
+scrapeForGames();
+// scrapeForOwners();

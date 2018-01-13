@@ -1,0 +1,25 @@
+:local(.header) {
+  background-color: #007bc6;
+  height: 6vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: flex-end; }
+  :local(.header) nav {
+    height: 40px;
+    display: flex; }
+    :local(.header) nav .selected {
+      border-bottom: 3px solid #ae1a20;
+      font-weight: bold; }
+  :local(.header) a {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    margin-right: 10px;
+    color: white !important;
+    box-sizing: border-box;
+    border-bottom: 3px solid transparent;
+    transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
+  :local(.header) a:first-of-type {
+    padding-left: 0; }
+  :local(.header) a:hover {
+    border-bottom: 3px solid #ae1a20; }

@@ -1,9 +1,47 @@
-:local(.root) {
-    color: green;
-}
-
+@import '../../styles/colors';
 :local(.ownerList) {
     display: flex;
-    flex-direction: column;
-    border: 1px solid hotpink;
+    flex-wrap: wrap;
+}
+
+:local(.owner)  {
+    flex: 0 0 42%;
+    height: 15vh;
+    margin: 0 2% 2% 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 3px 6px rgba(0,0,0,.2);
+    padding: 2%;
+    position: relative;
+    transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &.winner {
+        background-color: $one-championship;
+    }
+
+    &.loser {
+        background-color: $one-toiletbowl;
+    }
+
+    &:nth-child(-n+2) {
+        margin-top: 15px;
+    }
+
+    .aka {
+        position: absolute;
+        bottom: 20px;
+        font-weight: 500;
+        
+        .teamNames {
+            display: flex;
+            flex-direction: column;
+            span {
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    &:hover {
+        background-color: darken(white, 10);
+    }
 }

@@ -5,15 +5,28 @@ const typeDefs = `
         description: String!
     }
 
+    type Game {
+        uuid: String!
+        homeTeamId: String!
+        awayTeamId: String!
+        homeTeamScore: Float!
+        awayTeamScore: Float!
+        winner: String!
+        loser: String!
+    }
+
     type Owner {
-        id: String!,
-        teamNames: [String!]!
-        ownerName: String!
+        id: String
+        teamNames: [String]
+        ownerName: String
     }
 
     type Query {
         allLinks: [Link!]!
         allOwners: [Owner]!
+        allGames: [Game]!
+        gamesByOwnerId(ownerId: String!): [Game]!        
+        ownerByOwnerId(ownerId: String!): Owner  
     }
 
     type Mutation {

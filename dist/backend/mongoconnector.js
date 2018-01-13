@@ -33,7 +33,7 @@ var connect = function () {
                         return _context.abrupt('return', {
                             Links: db.collection('links'),
                             Owners: db.collection('owners'),
-                            db: db,
+                            Games: db.collection('games'),
                             database: database
                         });
 

@@ -3,7 +3,6 @@ import cheerio from 'cheerio';
 export const getOwnersForCurrentSeason = (response, season) => {
     const $ = cheerio.load(response.data);
 
-    const data = $(this);
     const teamNames = [];
     const owners = [];
     const ownerIds = [];
@@ -16,8 +15,6 @@ export const getOwnersForCurrentSeason = (response, season) => {
         ownerIds.push($(e).attr('class').slice(16))
         owners.push($(e).text())
     });
-
-    // console.log(season, teamNames)
 
     for(let u = 0; u < ownerIds.length; u++) {
         currentSeason.push({

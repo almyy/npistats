@@ -2,6 +2,7 @@ var axios = require('axios');
 var cheerio = require('cheerio');
 var moment = require('moment');
 import { mapAllTeamOwnersToTeamNames, getOwnersForCurrentSeason } from './scrapi/getAllTeamOwners';
+import { getGamesForSeason } from './scrapi/getAllGameStatistics';
 
 import connect from '../backend/mongoconnector'
 
@@ -18,7 +19,6 @@ for(var i = firstYear; i <= currentActiveYear; i++) {
 const scrapeForOwners = async () => {
     const mongo = await connect();
     const owners = mongo.Owners;
-    const cursor = owners.find({});
 
     const newArr = Promise.all(Object.keys(seasonMap).map(key => {
         var url = `http://fantasy.nfl.com/league/2273376/history/${key}/owners`;
@@ -32,4 +32,17 @@ const scrapeForOwners = async () => {
     })
 };
 
-scrapeForOwners();
+const scrapeForGames = async () => {
+    const mongo = await connect();
+    const games = mongo.Games;
+
+    for(let i = firstYear; i <= currentActiveYear; i++){
+        Promise.all(getGamesForSeason(i)).then(res => {
+            const flatArray = Array.prototype.concat.apply([], res)
+            games.insertMany(flatArray);
+        });
+    }
+}
+// scrapeForGames();
+// scrapeForOwners();
+

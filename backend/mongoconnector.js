@@ -7,7 +7,7 @@ const connect = async () => {
     return {
         Links: db.collection('links'),
         Owners: db.collection('owners'),
-        db: db,
+        Games: db.collection('games'),
         database: database,
     };
 }
