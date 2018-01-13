@@ -5,8 +5,15 @@ const typeDefs = `
         description: String!
     }
 
+    type Owner {
+        id: String!,
+        teamNames: [String!]!
+        ownerName: String!
+    }
+
     type Query {
         allLinks: [Link!]!
+        allOwners: [Owner]!
     }
 
     type Mutation {

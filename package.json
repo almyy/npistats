@@ -13,8 +13,9 @@
     "connect": "^3.6.5",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
+    "flow": "^0.2.3",
+    "flow-bin": "^0.63.1",
     "graphql": "^0.12.3",
-    "graphql-tag": "^2.6.1",
     "graphql-tools": "^2.18.0",
     "moment": "^2.20.1",
     "mongodb": "^3.0.1",
@@ -38,7 +39,8 @@
     "start-be": "npm run build-be && node dist/backend/index.js",
     "build-scrape": "rimraf dist/scrape && babel ./scrapi --out-dir dist/scrape --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "scrape": "npm run build-scrape && node dist/scrape/index.js",
-    "start": "run-p start-be start-fe"
+    "start": "run-p start-be start-fe",
+    "flow": "flow"
   },
   "proxy": "http://localhost:5000",
   "devDependencies": {
