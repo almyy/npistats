@@ -61,7 +61,7 @@ var start = function () {
             app.use('/graphiql', (0, _apolloServerExpress.graphiqlExpress)({ endpointURL: '/graphql' }));
 
             app.listen(5000, function () {
-              console.log('Go to http://localhost:3000/graphiql to run queries!');
+              console.log('Go to http://localhost:5000/graphiql to run queries!');
             });
 
           case 8:

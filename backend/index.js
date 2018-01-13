@@ -28,7 +28,7 @@ const start = async () => {
   app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
   app.listen(5000, () => {
-    console.log('Go to http://localhost:3000/graphiql to run queries!');
+    console.log('Go to http://localhost:5000/graphiql to run queries!');
   });
 }
 start();
