@@ -31,17 +31,17 @@
     "request-promise": "^4.2.2"
   },
   "scripts": {
-    "frontend": "run-p start-fe watch-css",
-    "start-fe": "react-scripts start",
+    "frontend": "run-p start-js watch-css",
+    "start-js": "react-scripts start",
     "build-fe": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "analyze": "source-map-explorer build/static/js/main.*",
     "build-be": "rimraf dist/backend && babel ./backend --out-dir dist/backend --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
-    "start-be": "npm run build-be && node dist/backend/index.js",
+    "backend": "npm run build-be && node dist/backend/index.js",
     "build-scrape": "rimraf dist/scrape && babel ./scrapi --out-dir dist/scrape --ignore ./node_modules,./.babelrc,./package.json,./npm-debug.log --copy-files",
     "scrape": "npm run build-scrape && node dist/scrape/index.js",
-    "start": "run-p start-be start-fe",
+    "start": "run-p backend start-js",
     "flow": "flow",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"

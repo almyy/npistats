@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import OwnerList from './components/ownerlist/OwnerList';
-import './App.css';
+
+import style from './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
+      <div className={style.app}>
         <OwnerList />
       </div>
     );

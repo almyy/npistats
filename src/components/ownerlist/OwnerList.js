@@ -30,7 +30,7 @@ class OwnerList extends Component<OwnerListProps> {
     const { data: {loading, allOwners  }} = this.props;
     if (loading) return <div/>
     return (
-      <div className="App">
+      <div className={style.ownerList}>
         {
           allOwners.map(owner => {
             return <OwnerListItem owner={owner} />
