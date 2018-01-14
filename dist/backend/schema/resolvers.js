@@ -97,20 +97,56 @@ var resolvers = {
         }(),
         gamesByOwnerId: function () {
             var _ref7 = (0, _asyncToGenerator3.default)( /*#__PURE__*/_regenerator2.default.mark(function _callee4(root, data, _ref8) {
-                var Games = _ref8.mongo.Games;
+                var _ref8$mongo = _ref8.mongo,
+                    Games = _ref8$mongo.Games,
+                    Owners = _ref8$mongo.Owners;
+                var owners, games, promises;
                 return _regenerator2.default.wrap(function _callee4$(_context4) {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
                                 _context4.next = 2;
+                                return Owners.find({}).toArray();
+
+                            case 2:
+                                owners = _context4.sent;
+                                _context4.next = 5;
                                 return Games.find({
                                     $or: [{ awayTeamId: data.ownerId }, { homeTeamId: data.ownerId }]
                                 }).toArray();
 
-                            case 2:
+                            case 5:
+                                games = _context4.sent;
+                                promises = [owners, games];
+                                _context4.next = 9;
+                                return Promise.all(promises).then(function (result) {
+                                    return games.map(function (game) {
+                                        console.log(game);
+                                        var awayTeam = owners.filter(function (owner) {
+                                            return owner.id == game.awayTeamId;
+                                        })[0];
+                                        var homeTeam = owners.filter(function (owner) {
+                                            return owner.id == game.homeTeamId;
+                                        })[0];
+
+                                        return {
+                                            uuid: game.uuid,
+                                            winner: game.winner,
+                                            loser: game.loser,
+                                            homeTeamId: homeTeam,
+                                            awayTeamId: awayTeam,
+                                            homeTeamScore: game.homeTeamScore,
+                                            awayTeamScore: game.awayTeamScore,
+                                            season: game.season,
+                                            week: game.week
+                                        };
+                                    });
+                                });
+
+                            case 9:
                                 return _context4.abrupt('return', _context4.sent);
 
-                            case 3:
+                            case 10:
                             case 'end':
                                 return _context4.stop();
                         }

@@ -7,8 +7,8 @@ const typeDefs = `
 
     type Game {
         uuid: String!
-        homeTeamId: String!
-        awayTeamId: String!
+        homeTeamId: Owner!
+        awayTeamId: Owner!
         homeTeamScore: Float!
         awayTeamScore: Float!
         winner: String!
@@ -16,16 +16,16 @@ const typeDefs = `
     }
 
     type Owner {
-        id: String
-        teamNames: [String]
-        ownerName: String
+        id: String!
+        teamNames: [String]!
+        ownerName: String!
     }
 
     type Query {
         allLinks: [Link!]!
         allOwners: [Owner]!
         allGames: [Game]!
-        gamesByOwnerId(ownerId: String!): [Game]!        
+        gamesByOwnerId(ownerId: String!): [Game]! 
         ownerByOwnerId(ownerId: String!): Owner  
     }
 

@@ -9,13 +9,38 @@ const resolvers = {
         allGames: async (root, data, { mongo: { Games }}) => {
             return await Games.find({}).toArray();
         },
-        gamesByOwnerId: async (root, data, {mongo: { Games }}) => {
-            return await Games.find({
+        gamesByOwnerId: async (root, data, {mongo: { Games, Owners }}) => {
+            const owners = await Owners.find({}).toArray();
+            const games = await Games.find({
                 $or: [
                     {awayTeamId: data.ownerId},
                     {homeTeamId: data.ownerId}
                 ]
             }).toArray();
+
+            const promises = [owners, games];
+            return await Promise.all(promises).then(result => {
+                return games.map(game => {
+                    const awayTeam = owners.filter(owner => {
+                        return owner.id == game.awayTeamId;
+                    })[0];
+                    const homeTeam = owners.filter(owner => {
+                        return owner.id == game.homeTeamId;
+                    })[0];
+                      
+                    return {
+                        uuid: game.uuid,
+                        winner: game.winner,
+                        loser: game.loser,
+                        homeTeamId: homeTeam,
+                        awayTeamId: awayTeam,
+                        homeTeamScore: game.homeTeamScore,
+                        awayTeamScore: game.awayTeamScore,
+                        season: game.season,
+                        week: game.week,
+                    }
+                });
+            });
         },
         ownerByOwnerId: async (root, data, { mongo: {Owners }}) => {
             return await Owners.findOne({id : data.ownerId});

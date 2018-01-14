@@ -8,9 +8,10 @@
 /coverage
 
 # production
-/build
-/data
-/dist
+build
+data
+dist/backend/schema/resolvers.js
+dist/scrape
 
 # misc
 .DS_Store
