@@ -6,12 +6,8 @@
   flex: 0 0 42%;
   height: 15vh;
   margin: 0 2% 2% 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
   padding: 2%;
-  position: relative;
-  transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1); }
+  position: relative; }
   :local(.owner).winner {
     background-color: #E8DD8F; }
   :local(.owner).loser {
@@ -27,5 +23,3 @@
       flex-direction: column; }
       :local(.owner) .aka .teamNames span {
         font-size: 0.7rem; }
-  :local(.owner):hover {
-    background-color: #e6e6e6; }

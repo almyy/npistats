@@ -8,12 +8,8 @@
     flex: 0 0 42%;
     height: 15vh;
     margin: 0 2% 2% 0;
-    background-color: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 3px 6px rgba(0,0,0,.2);
     padding: 2%;
     position: relative;
-    transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
 
     &.winner {
         background-color: $one-championship;
@@ -39,9 +35,5 @@
                 font-size: 0.7rem;
             }
         }
-    }
-
-    &:hover {
-        background-color: darken(white, 10);
     }
 }

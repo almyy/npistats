@@ -1,0 +1,29 @@
+:local(.list) {
+  display: flex;
+  flex-wrap: wrap; }
+
+:local(.game) {
+  flex: 0 1 calc(45% - 4px);
+  margin-right: 2%;
+  margin-top: 2%;
+  padding: 2%;
+  position: relative;
+  border: 2px solid transparent; }
+  :local(.game):nth-child(2n) {
+    margin-right: 0 !important; }
+  :local(.game).winner {
+    border: 2px solid #58BC62; }
+  :local(.game) .scores,
+  :local(.game) .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; }
+  :local(.game) .score {
+    color: #e25959; }
+  :local(.game) .scoreWinner {
+    color: #58BC62; }
+  :local(.game) .vs {
+    font-size: 0.8rem;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%); }

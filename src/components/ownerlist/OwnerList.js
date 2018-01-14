@@ -21,7 +21,7 @@ const OwnerListItem = ({owner}: {owner: OwnerType}) => {
     const winner = owner.id === "31019";
     const loser = owner.id === "7342189";
     return (
-      <Link to={`/owner/${owner.id}`} className={classNames(style.owner, {winner, loser})}>
+      <Link to={`/owner/${owner.id}`} className={classNames(style.owner, "card", {winner, loser})}>
         <h3>{owner.teamNames[0]}</h3>
         {owner.teamNames.length > 1 && <div className="aka">
           <h6> Also known as: </h6>

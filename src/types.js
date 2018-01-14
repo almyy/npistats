@@ -6,8 +6,8 @@ export const OwnerType {
 
 export const GameType {
     uuid: string,
-    homeTeamId: string,
-    awayTeamId: string,
+    homeTeamId: OwnerType,
+    awayTeamId: OwnerType,
     homeTeamScore: number,
     awayTeamScore: number,
     winner: string,

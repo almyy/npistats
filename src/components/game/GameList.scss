@@ -1,0 +1,46 @@
+@import '../../styles/colors';
+
+:local(.list) {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+:local(.game) {
+    flex: 0 1 calc(45% - 4px);
+    margin-right: 2%;
+    margin-top: 2%;
+    padding: 2%;
+    position: relative;
+    border: 2px solid transparent;    
+    
+    &:nth-child(2n) {
+        margin-right: 0 !important;
+    }
+    
+    &.winner {
+        border: 2px solid $winner-game;
+    }
+
+    .scores,
+    .title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .score {
+        color: $loser-game;
+    }
+
+    .scoreWinner {
+        color: $winner-game;
+    }
+
+
+    .vs {
+        font-size: 0.8rem;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}

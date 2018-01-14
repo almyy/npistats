@@ -121,7 +121,6 @@ var resolvers = {
                                 _context4.next = 9;
                                 return Promise.all(promises).then(function (result) {
                                     return games.map(function (game) {
-                                        console.log(game);
                                         var awayTeam = owners.filter(function (owner) {
                                             return owner.id == game.awayTeamId;
                                         })[0];
