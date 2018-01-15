@@ -1,6 +1,7 @@
 // @flow
 
 import React, { Component, Fragment } from 'react';
+import { Route, withRouter } from 'react-router-dom';
 import type { OwnerType, GameType } from '../../types';
 import { graphql, compose } from 'react-apollo';
 import { Link } from 'react-router-dom';
@@ -48,14 +49,16 @@ type OwnerProps = {
 }
 
 const Owner = (props: OwnerProps)  => {
-    const { owner: {ownerByOwnerId, loading }, games } = props;
+    const { owner: {ownerByOwnerId, loading }, games, match } = props;
     if(loading) return <div/>
+    console.log(match)
     return (
         <Fragment>
             {/* <Link to="/" >Back</Link> */}
-            <h2> {ownerByOwnerId.ownerName} </h2>
+            {/* <h2> {ownerByOwnerId.ownerName} </h2> */}
             <KeyStats games={games.gamesByOwnerId} loading={games.loading} ownerId={ownerByOwnerId.id}/>
-            <GameList games={games.gamesByOwnerId} loading={games.loading} ownerId={ownerByOwnerId.id}/>
+            <Route path={`${match.path}/ge`} component={() => <GameList games={[{"uuid":"c8ccf986-df19-4310-a6b8-84f4512a3f41","homeTeamId":{"id":"7344263","ownerName":"Aasmund","teamNames":["KEKK!","prostyleMEGAREBUILD","Cam og co"],"__typename":"Owner"},"awayTeamId":{"id":"31019","ownerName":"Jorgen","teamNames":["Kentucky Chickens","Devante Parker suger mega dick"],"__typename":"Owner"},"homeTeamScore":97.36,"awayTeamScore":80.52,"winner":"7344263","loser":"31019","__typename":"Game"}]} loading={false} ownerId={"31019"} />} />
+            <Route path={`${match.path}/`} exact component={() => <GameList games={games.gamesByOwnerId} loading={games.loading} ownerId={ownerByOwnerId.id} />} />
         </Fragment>
 
     )
@@ -72,4 +75,4 @@ const withGames = compose(
     }),
 );
 
-export default withGames(Owner);
+export default withGames(withRouter(Owner));

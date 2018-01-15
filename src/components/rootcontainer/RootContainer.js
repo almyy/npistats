@@ -6,6 +6,8 @@ import { Switch, Route } from 'react-router-dom';
 import Header from '../header/Header';
 import Owner from '../owner/Owner';
 
+import GameList from '../game/GameList';
+
 const OwnerDetails = () => {
     return (
         <div> 
@@ -22,6 +24,7 @@ const RootContainer = () => {
         <Switch >
             <Route path="/" exact component={OwnerList} /> 
             <Route path="/owner/:ownerId" component={Owner} />
+
         </Switch>
     </div>
     </Fragment>

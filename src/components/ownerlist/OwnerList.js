@@ -36,7 +36,6 @@ const OwnerListItem = ({owner}: {owner: OwnerType}) => {
 
 class OwnerList extends Component<OwnerListProps> {
   render() {
-    console.log(this.props)
     const { data: {loading, allOwners  }} = this.props;
     if (loading) return <div/>
     return (
