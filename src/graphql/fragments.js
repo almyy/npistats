@@ -11,16 +11,18 @@ export const OWNER_DATA_FRAGMENT = gql`
 export const GAME_DATA_FRAGMENT = gql`
   fragment GameData on Game {
     uuid
-    homeTeamId {
+    homeTeam {
       ...OwnerData
     }
-    awayTeamId {
+    awayTeam {
       ...OwnerData
     }
     homeTeamScore
     awayTeamScore
     winner
     loser
+    week
+    season
   },
   ${OWNER_DATA_FRAGMENT}
 `;

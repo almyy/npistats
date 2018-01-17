@@ -3,8 +3,9 @@
     border: 1px solid #ccc;
     box-shadow: 0 3px 6px rgba(0,0,0,.2);
     transition: background-color 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-sizing: border-box;
     
     &:hover {
-        background-color: darken(white, 10);
+        // background-color: darken(white, 10);
     }
 }

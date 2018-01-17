@@ -1,11 +1,10 @@
 const MongoClient = require('mongodb').MongoClient;
-const MONGO_URL = 'mongodb://localhost:27017';
+const MONGO_URL = process.env.MONGO_URL;
 
 const connect = async () => {
-    const database = await MongoClient.connect(MONGO_URL);
+    const database = await MongoClient.connect("mongodb://mikaelrs:aoeu1234@ds149535.mlab.com:49535/npi");
     const db = database.db("npi");
     return {
-        Links: db.collection('links'),
         Owners: db.collection('owners'),
         Games: db.collection('games'),
         database: database,

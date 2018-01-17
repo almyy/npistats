@@ -1,3 +1,15 @@
+const mapToGameResponse = (game, homeTeam, awayTeam) => ({
+    uuid: game.uuid,
+    winner: game.winner,
+    loser: game.loser,
+    homeTeam: homeTeam,
+    awayTeam: awayTeam,
+    homeTeamScore: game.homeTeamScore,
+    awayTeamScore: game.awayTeamScore,
+    season: game.season,
+    week: game.week,
+});
+
 const resolvers = {
     Query: {
         allLinks: async (root, data, {mongo: {Links}}) => { 
@@ -8,6 +20,62 @@ const resolvers = {
         },
         allGames: async (root, data, { mongo: { Games }}) => {
             return await Games.find({}).toArray();
+        },
+        regularSeasonGamesByOwnerId: async (root, data, {mongo: { Games, Owners}}) => {
+            const owners = await Owners.find({}).toArray();
+            const games = await Games.find({
+                $and: [
+                    {playOff: false},
+                    {
+                        $or: [
+                            {awayTeamId: data.ownerId},
+                            {homeTeamId: data.ownerId}
+                        ], 
+                    }
+                ]
+            }).toArray();
+
+            const promises = [owners, games];
+            return await Promise.all(promises).then(result => {
+                return games.map(game => {
+                    const awayTeam = owners.filter(owner => {
+                        return owner.id == game.awayTeamId;
+                    })[0];
+                    const homeTeam = owners.filter(owner => {
+                        return owner.id == game.homeTeamId;
+                    })[0];
+                      
+                    return mapToGameResponse(game, homeTeam, awayTeam);
+                });
+            });
+        },
+        playOffGamesByOwnerId: async (root, data, {mongo: { Games, Owners}}) => {
+            const owners = await Owners.find({}).toArray();
+            const games = await Games.find({
+                $and: [
+                    {playOff: true},
+                    {
+                        $or: [
+                            {awayTeamId: data.ownerId},
+                            {homeTeamId: data.ownerId}
+                        ], 
+                    }
+                ]
+            }).toArray();
+
+            const promises = [owners, games];
+            return await Promise.all(promises).then(result => {
+                return games.map(game => {
+                    const awayTeam = owners.filter(owner => {
+                        return owner.id == game.awayTeamId;
+                    })[0];
+                    const homeTeam = owners.filter(owner => {
+                        return owner.id == game.homeTeamId;
+                    })[0];
+                      
+                    return mapToGameResponse(game, homeTeam, awayTeam);
+                });
+            });
         },
         gamesByOwnerId: async (root, data, {mongo: { Games, Owners }}) => {
             const owners = await Owners.find({}).toArray();
@@ -28,17 +96,7 @@ const resolvers = {
                         return owner.id == game.homeTeamId;
                     })[0];
                       
-                    return {
-                        uuid: game.uuid,
-                        winner: game.winner,
-                        loser: game.loser,
-                        homeTeamId: homeTeam,
-                        awayTeamId: awayTeam,
-                        homeTeamScore: game.homeTeamScore,
-                        awayTeamScore: game.awayTeamScore,
-                        season: game.season,
-                        week: game.week,
-                    }
+                    return mapToGameResponse(game, homeTeam, awayTeam);
                 });
             });
         },

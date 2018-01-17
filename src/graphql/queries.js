@@ -28,3 +28,21 @@ export const GAMES_BY_OWNERID_QUERY = gql`
   }
   ${GAME_DATA_FRAGMENT}
 `;
+
+export const REGULAR_SEASON_GAMES_BY_OWNERID_QUERY = gql`
+  query regularSeasonGamesByOwnerId($ownerId: String!) {
+    regularSeasonGamesByOwnerId(ownerId: $ownerId) {
+      ...GameData
+    }
+  }
+  ${GAME_DATA_FRAGMENT}
+`;
+
+export const PLAY_OFF_GAMES_BY_OWNERID_QUERY = gql`
+  query playOffGamesByOwnerId($ownerId: String!) {
+    playOffGamesByOwnerId(ownerId: $ownerId) {
+      ...GameData
+    }
+  }
+  ${GAME_DATA_FRAGMENT}
+`;

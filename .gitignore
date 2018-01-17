@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/dist
 **/node_modules
 
 # testing
@@ -10,8 +11,7 @@
 # production
 build
 data
-dist/backend/schema/resolvers.js
-dist/scrape
+*.css
 
 # misc
 .DS_Store

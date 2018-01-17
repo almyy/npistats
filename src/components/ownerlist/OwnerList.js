@@ -18,15 +18,15 @@ type OwnerListProps = {
 }
 
 const OwnerListItem = ({owner}: {owner: OwnerType}) => {
-    const winner = owner.id === "31019";
-    const loser = owner.id === "7342189";
+    const winner = false;
+    const loser = false;
     return (
       <Link to={`/owner/${owner.id}`} className={classNames(style.owner, "card", {winner, loser})}>
         <h3>{owner.teamNames[0]}</h3>
         {owner.teamNames.length > 1 && <div className="aka">
           <h6> Also known as: </h6>
           <div className="teamNames">
-          {owner.teamNames.slice(1).map(name => <span>{name}</span>)}
+          {owner.teamNames.slice(1).map(name => <span key={name}>{name}</span>)}
           </div>
           </div>
         }
@@ -44,7 +44,7 @@ class OwnerList extends Component<OwnerListProps> {
         <div className={style.ownerList}>
         {
           allOwners.map(owner => {
-            return <OwnerListItem owner={owner} />
+            return <OwnerListItem owner={owner} key={owner.id}/>
           })
         }
       </div>

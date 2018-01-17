@@ -1,0 +1,50 @@
+@import '../../../styles/colors';
+
+:local(.keyStats) {
+    height: 200px;
+    padding: 4%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-weight: 600;
+    
+    @media screen and (max-width: 640px) {
+        height: 150px;
+    }
+
+    > div {
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .championship {
+        font-size: 3rem;        
+
+        @media screen and (max-width: 640px) {
+            font-size: 2rem;
+        }
+    }
+    
+    .number {
+        display: flex;
+        justify-content: space-between;        
+        font-size: 2rem;
+
+        @media screen and (max-width: 640px) {
+            font-size: 1.2rem;
+        }
+    }
+
+    .numbers {
+        flex: 0 0 46%;
+    }
+
+    .wins {
+         color: $winner-game;
+    }
+
+    .losses {
+        color: $loser-game;
+    }
+}

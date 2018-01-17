@@ -25,21 +25,23 @@ const scrapeForOwners = async () => {
         return axios.get(url).then((response) => {seasonMap[key] = getOwnersForCurrentSeason(response, key)})
     }))
 
-    newArr.then( () => {
-        owners.insertMany(mapAllTeamOwnersToTeamNames(seasonMap)).then(()=> {
-            mongo.database.close();
-        });
-    })
+    // newArr.then( () => {
+    //     console.log(seasonMap)
+    //     owners.insertMany(mapAllTeamOwnersToTeamNames(seasonMap)).then(()=> {
+    //         mongo.database.close();
+    //     });
+    // })
 };
 
 const scrapeForGames = async () => {
-    const mongo = await connect();
+    const mongo = await connect().then(res=>console.log(res)).catch(err => console.log(err));;
     const games = mongo.Games;
 
     for(let i = firstYear; i <= currentActiveYear; i++){
         Promise.all(getGamesForSeason(i)).then(res => {
             const flatArray = Array.prototype.concat.apply([], res)
             games.insertMany(flatArray);
+            mongo.database.close();
         });
     }
 }

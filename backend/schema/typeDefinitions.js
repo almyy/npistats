@@ -7,12 +7,14 @@ const typeDefs = `
 
     type Game {
         uuid: String!
-        homeTeamId: Owner!
-        awayTeamId: Owner!
+        homeTeam: Owner!
+        awayTeam: Owner!
         homeTeamScore: Float!
         awayTeamScore: Float!
         winner: String!
         loser: String!
+        week: String!
+        season: String!
     }
 
     type Owner {
@@ -26,6 +28,8 @@ const typeDefs = `
         allOwners: [Owner]!
         allGames: [Game]!
         gamesByOwnerId(ownerId: String!): [Game]! 
+        regularSeasonGamesByOwnerId(ownerId: String!): [Game]! 
+        playOffGamesByOwnerId(ownerId: String!): [Game]
         ownerByOwnerId(ownerId: String!): Owner  
     }
 

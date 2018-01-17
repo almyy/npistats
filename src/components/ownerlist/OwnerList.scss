@@ -5,11 +5,16 @@
 }
 
 :local(.owner)  {
-    flex: 0 0 42%;
+    flex: 0 0 49%;
     height: 15vh;
     margin: 0 2% 2% 0;
     padding: 2%;
     position: relative;
+
+    @media screen and (max-width: 640px) {
+        flex: 0 0 100%;
+        margin: 15px 0 0 0; 
+    }
 
     &.winner {
         background-color: $one-championship;
@@ -21,6 +26,10 @@
 
     &:nth-child(-n+2) {
         margin-top: 15px;
+    }
+
+    &:nth-child(2n) {
+        margin-right:0;
     }
 
     .aka {
