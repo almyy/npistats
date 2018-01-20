@@ -4,6 +4,7 @@
 /node_modules
 /dist
 **/node_modules
+*.css    
 
 # testing
 /coverage
@@ -11,7 +12,6 @@
 # production
 build
 data
-*.css
 
 # misc
 .DS_Store
