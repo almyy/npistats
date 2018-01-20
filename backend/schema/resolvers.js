@@ -1,29 +1,27 @@
-const mapToGameResponse = (game, homeTeam, awayTeam) => ({
+import { Game, Owner } from '../mongooseconnector';
+import Mongo from '../mongoconnector';
+
+const mapToGameResponse = (game, homeTeam, awayTeam, time) => ({
     uuid: game.uuid,
     winner: game.winner,
     loser: game.loser,
-    homeTeam: homeTeam,
-    awayTeam: awayTeam,
     homeTeamScore: game.homeTeamScore,
     awayTeamScore: game.awayTeamScore,
     season: game.season,
     week: game.week,
+    time: time
 });
 
 const resolvers = {
     Query: {
-        allLinks: async (root, data, {mongo: {Links}}) => { 
-            return await Links.find({}).toArray();
+        allOwners: async (root, data) => { 
+            return await Owner.find({}).exec();
         },
-        allOwners: async (root, data, { mongo: { Owners }}) => { 
-            return await Owners.find({}).toArray();
+        allGames: async (root, data) => {
+            return await Game.find({}).exec();
         },
-        allGames: async (root, data, { mongo: { Games }}) => {
-            return await Games.find({}).toArray();
-        },
-        regularSeasonGamesByOwnerId: async (root, data, {mongo: { Games, Owners}}) => {
-            const owners = await Owners.find({}).toArray();
-            const games = await Games.find({
+        regularSeasonGamesByOwnerId: async (root, data) => {
+            return await Game.find({
                 $and: [
                     {playOff: false},
                     {
@@ -33,25 +31,10 @@ const resolvers = {
                         ], 
                     }
                 ]
-            }).toArray();
-
-            const promises = [owners, games];
-            return await Promise.all(promises).then(result => {
-                return games.map(game => {
-                    const awayTeam = owners.filter(owner => {
-                        return owner.id == game.awayTeamId;
-                    })[0];
-                    const homeTeam = owners.filter(owner => {
-                        return owner.id == game.homeTeamId;
-                    })[0];
-                      
-                    return mapToGameResponse(game, homeTeam, awayTeam);
-                });
-            });
+            }).exec();
         },
-        playOffGamesByOwnerId: async (root, data, {mongo: { Games, Owners}}) => {
-            const owners = await Owners.find({}).toArray();
-            const games = await Games.find({
+        playOffGamesByOwnerId: async (root, data) => {
+            return await Game.find({
                 $and: [
                     {playOff: true},
                     {
@@ -61,65 +44,28 @@ const resolvers = {
                         ], 
                     }
                 ]
-            }).toArray();
-
-            const promises = [owners, games];
-            return await Promise.all(promises).then(result => {
-                return games.map(game => {
-                    const awayTeam = owners.filter(owner => {
-                        return owner.id == game.awayTeamId;
-                    })[0];
-                    const homeTeam = owners.filter(owner => {
-                        return owner.id == game.homeTeamId;
-                    })[0];
-                      
-                    return mapToGameResponse(game, homeTeam, awayTeam);
-                });
-            });
+            }).exec();
         },
-        gamesByOwnerId: async (root, data, {mongo: { Games, Owners }}) => {
-            const owners = await Owners.find({}).toArray();
-            const games = await Games.find({
+        gamesByOwnerId: async (root, data) => {
+            return await Game.find({
                 $or: [
                     {awayTeamId: data.ownerId},
                     {homeTeamId: data.ownerId}
                 ]
-            }).toArray();
+            }).exec();
+        },
+        ownerByOwnerId: async (root, data) => {
+            return await Owner.findOne({id : data.ownerId});
+        }
+    },
 
-            const promises = [owners, games];
-            return await Promise.all(promises).then(result => {
-                return games.map(game => {
-                    const awayTeam = owners.filter(owner => {
-                        return owner.id == game.awayTeamId;
-                    })[0];
-                    const homeTeam = owners.filter(owner => {
-                        return owner.id == game.homeTeamId;
-                    })[0];
-                      
-                    return mapToGameResponse(game, homeTeam, awayTeam);
-                });
-            });
+    Game: {
+        async homeTeam(game, rest) {
+            return await Owner.findOne({id: game.homeTeamId});
         },
-        ownerByOwnerId: async (root, data, { mongo: {Owners }}) => {
-            return await Owners.findOne({id : data.ownerId});
+        async awayTeam(game, rest) {
+            return await Owner.findOne({id: game.awayTeamId})
         }
-    },
-  
-    Mutation: {
-        createLink: async (root, data, {mongo: {Links}}) => {
-            const newLink = {id: 21, ...data};
-            const response = await Links.insert(newLink); 
-            return Object.assign({id: response.insertedIds[0]}, newLink);
-        }
-    },
-  
-    Link: {
-        id: root => root._id || root.id,
-    },
-    Subscription: {
-        Link: {
-            subscribe: () => pubsub.asyncIterator('Link'),
-        },
     },
   };
 

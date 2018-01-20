@@ -23,10 +23,6 @@ const start = async () => {
     const staticPath = path.join(__dirname, '../../build');
 
     console.log('Production, serving static files from ' + staticPath);
-    console.log(path.resolve('/build'))
-    console.log(path.resolve('build'))
-    console.log(path.resolve('build/'))
-
     app.use(express.static(path.resolve('build')));
   } else {
     console.log('Env is not production, not serving any static files.');
@@ -34,7 +30,6 @@ const start = async () => {
 
   app.use('/graphql', bodyParser.json(), 
     graphqlExpress({
-      context: { mongo },
       schema,
     })
   );

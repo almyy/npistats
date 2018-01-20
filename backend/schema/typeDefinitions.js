@@ -33,23 +33,6 @@ const typeDefs = `
         ownerByOwnerId(ownerId: String!): Owner  
     }
 
-    type Mutation {
-        createLink(url: String!, description: String!): Link!
-    }
-
-    type Subscription {
-        Link(filter: LinkSubscriptionFilter): LinkSubscriptionPayload
-    }
-
-    input LinkSubscriptionFilter {
-        mutation_in: [_ModelMutationType!]
-    }
-      
-    type LinkSubscriptionPayload {
-        mutation: _ModelMutationType!
-        node: Link
-    }
-      
     enum _ModelMutationType {
         CREATED
         UPDATED
