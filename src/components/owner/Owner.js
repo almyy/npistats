@@ -8,7 +8,9 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import GameList from '../game/GameList';
+import Loader from '../loader/Loader';
 import style from './Owner.css';
+
 
 import { OWNER_BY_OWNERID_QUERY, GAMES_BY_OWNERID_QUERY, PLAY_OFF_GAMES_BY_OWNERID_QUERY, REGULAR_SEASON_GAMES_BY_OWNERID_QUERY} from '../../graphql/queries';
 
@@ -25,7 +27,7 @@ type OwnerProps = {
 
 const Owner = (props: OwnerProps)  => {
     const { owner: {ownerByOwnerId, loading }, games, match, playOff, regularSeason} = props;
-    if(loading || games.loading) return <div/>
+    if(loading || games.loading) return <Loader/>
     return (
         <Fragment>
             {/* <Link to="/" >Back</Link> */}

@@ -1,8 +1,6 @@
-// at the top with imports:
 import Mongoose from 'mongoose';
 const MONGO_URL = process.env.MONGO_URL;
 
-// somewhere in the middle:
 Mongoose.Promise = global.Promise;
 
 const mongo = Mongoose.connect(MONGO_URL);
@@ -28,5 +26,4 @@ const OwnerSchema = Mongoose.Schema({
 const Owner = Mongoose.model('owners', OwnerSchema);
 const Game = Mongoose.model('games', GameSchema);
 
-// at the bottom, add View to the exports
 export { Game, Owner };
