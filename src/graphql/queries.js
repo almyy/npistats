@@ -1,21 +1,21 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
-import { OWNER_DATA_FRAGMENT, GAME_DATA_FRAGMENT } from './fragments';
+import { OWNER_DATA_FRAGMENT, GAME_DATA_FRAGMENT } from "./fragments";
 
 export const ALL_OWNERS_QUERY = gql`
   query allOwners {
-      allOwners {
-        ...OwnerData
-      }
+    allOwners {
+      ...OwnerData
+    }
   }
   ${OWNER_DATA_FRAGMENT}
 `;
 
 export const OWNER_BY_OWNERID_QUERY = gql`
   query ownerByOwnerId($ownerId: String!) {
-      ownerByOwnerId(ownerId: $ownerId) {
-        ...OwnerData
-      }
+    ownerByOwnerId(ownerId: $ownerId) {
+      ...OwnerData
+    }
   }
   ${OWNER_DATA_FRAGMENT}
 `;
@@ -23,6 +23,15 @@ export const OWNER_BY_OWNERID_QUERY = gql`
 export const GAMES_BY_OWNERID_QUERY = gql`
   query gamesByOwnerId($ownerId: String!) {
     gamesByOwnerId(ownerId: $ownerId) {
+      ...GameData
+    }
+  }
+  ${GAME_DATA_FRAGMENT}
+`;
+
+export const GAMES_BY_SEASON_QUERY = gql`
+  query gamesBySeason($season: Float!) {
+    gamesBySeason(season: $season) {
       ...GameData
     }
   }

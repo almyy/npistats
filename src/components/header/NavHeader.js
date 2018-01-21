@@ -10,14 +10,14 @@ const NavHeader = (props) => {
     const { routes } = props;
     return (
         <Fragment>
-            <div className={classNames(style.title, 'card')}> 
+            <div className={classNames(style.title, 'card', props.className)}> 
                 <nav className="card-nav">
                     {routes.map(
                         route => <NavLink to={route.path} activeClassName="selected"> {route.title} </NavLink>
                     )}
                 </nav>
             </div> 
-            {routes.map(route => <Route path={route.path} component={()=><div>come</div>} />)}
+            {routes.map(route => <Route path={route.path} component={route.component} />)}
         </Fragment>
     )
 }

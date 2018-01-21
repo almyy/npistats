@@ -1,6 +1,7 @@
-import Mongoose from 'mongoose';
+import Mongoose from "mongoose";
 const MONGO_URL = process.env.MONGO_URL;
 
+console.log("ANO:THEUNEOTUH", MONGO_URL);
 Mongoose.Promise = global.Promise;
 
 const mongo = Mongoose.connect(MONGO_URL);
@@ -13,8 +14,8 @@ const GameSchema = Mongoose.Schema({
   awayTeamScore: Number,
   homeTeamId: String,
   awayTeamId: String,
-  season: String,
-  week: String,
+  season: Number,
+  week: Number,
 });
 
 const OwnerSchema = Mongoose.Schema({
@@ -23,7 +24,7 @@ const OwnerSchema = Mongoose.Schema({
   ownerName: String,
 });
 
-const Owner = Mongoose.model('owners', OwnerSchema);
-const Game = Mongoose.model('games', GameSchema);
+const Owner = Mongoose.model("owners", OwnerSchema);
+const Game = Mongoose.model("games", GameSchema);
 
 export { Game, Owner };

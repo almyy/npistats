@@ -27,6 +27,7 @@ const typeDefs = `
         allLinks: [Link!]!
         allOwners: [Owner]!
         allGames: [Game]!
+        gamesBySeason(season: Float!): [Game]!
         gamesByOwnerId(ownerId: String!): [Game]! 
         regularSeasonGamesByOwnerId(ownerId: String!): [Game]! 
         playOffGamesByOwnerId(ownerId: String!): [Game]
