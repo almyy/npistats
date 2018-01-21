@@ -25,6 +25,10 @@
         border-bottom: 2px solid transparent; 
         transition: all 0.2s linear; 
 
+        @media screen and (max-width: 480px) {
+            padding: 0 15px;
+        }
+
         &.selected {
             color: $header-color;
             border-bottom: 2px solid $header-color;

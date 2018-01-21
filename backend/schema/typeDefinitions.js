@@ -14,6 +14,7 @@ const typeDefs = `
         winner: String!
         loser: String!
         week: String!
+        playOff: Boolean!
         season: String!
     }
 
@@ -27,7 +28,7 @@ const typeDefs = `
         allLinks: [Link!]!
         allOwners: [Owner]!
         allGames: [Game]!
-        gamesBySeason(season: Float!): [Game]!
+        gamesBySeason(season: Float): [Game]!
         gamesByOwnerId(ownerId: String!): [Game]! 
         regularSeasonGamesByOwnerId(ownerId: String!): [Game]! 
         playOffGamesByOwnerId(ownerId: String!): [Game]
@@ -41,4 +42,4 @@ const typeDefs = `
     }
 `;
 
-export default typeDefs
+export default typeDefs;

@@ -9,7 +9,11 @@ const resolvers = {
       return await Game.find({}).exec();
     },
     gamesBySeason: async (root, data) => {
-      return await Game.find({ season: data.season }).exec();
+      if (data.season) {
+        return await Game.find({ season: data.season }).exec();
+      } else {
+        return await Game.find({}).exec();
+      }
     },
     regularSeasonGamesByOwnerId: async (root, data) => {
       return await Game.find({

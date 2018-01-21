@@ -1,3 +1,24 @@
 :local(.navigation) {
     margin: 20px 0;
 }
+
+:local(.main) {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+:local(.table) {
+    display: flex;
+    flex-direction: column;
+
+    .header {
+        font-weight: 600;
+    }
+
+    .header,
+    .table-row {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+    }
+}

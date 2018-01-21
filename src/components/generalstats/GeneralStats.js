@@ -1,8 +1,7 @@
 // @flow
 
-import React, { Fragment } from "react";
+import React from "react";
 
-import classNames from "classnames";
 import NavHeader from "../header/NavHeader";
 import SeasonStats from "./SeasonStats";
 
@@ -14,7 +13,7 @@ const First = () => {
 const Second = () => <SeasonStats season="2015" />;
 const Third = () => <SeasonStats season="2016" />;
 const Fourth = () => <SeasonStats season="2017" />;
-const All = () => <SeasonStats season="ass" />;
+const All = () => <SeasonStats />;
 
 const GeneralStats = props => {
   const { match } = props;
@@ -25,14 +24,7 @@ const GeneralStats = props => {
     { title: "2017", path: `${match.path}/2017`, component: Fourth },
     { title: "All seasons", path: `${match.path}/allSeasons`, component: All },
   ];
-  return (
-    <Fragment>
-      <div className={classNames(style.header, "card")}>
-        <h3>Stats</h3>
-      </div>
-      <NavHeader routes={routes} className={style.navigation} />
-    </Fragment>
-  );
+  return <NavHeader routes={routes} className={style.navigation} />;
 };
 
 export default GeneralStats;

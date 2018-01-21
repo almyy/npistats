@@ -1,7 +1,6 @@
 import Mongoose from "mongoose";
 const MONGO_URL = process.env.MONGO_URL;
 
-console.log("ANO:THEUNEOTUH", MONGO_URL);
 Mongoose.Promise = global.Promise;
 
 const mongo = Mongoose.connect(MONGO_URL);
@@ -16,6 +15,7 @@ const GameSchema = Mongoose.Schema({
   awayTeamId: String,
   season: Number,
   week: Number,
+  playOff: Boolean,
 });
 
 const OwnerSchema = Mongoose.Schema({

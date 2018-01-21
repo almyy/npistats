@@ -30,7 +30,7 @@ export const GAMES_BY_OWNERID_QUERY = gql`
 `;
 
 export const GAMES_BY_SEASON_QUERY = gql`
-  query gamesBySeason($season: Float!) {
+  query gamesBySeason($season: Float) {
     gamesBySeason(season: $season) {
       ...GameData
     }

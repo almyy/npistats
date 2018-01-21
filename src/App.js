@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import RootContainer from './components/rootcontainer/RootContainer';
+import React, { Component } from "react";
+import RootContainer from "./components/rootcontainer/RootContainer";
 
-import style from './App.css';
-import './App.css';
+import style from "./App.css";
+import "./App.css";
 
 class App extends Component {
   render() {
@@ -11,7 +10,7 @@ class App extends Component {
       <div className={style.app}>
         <RootContainer />
       </div>
-    )
+    );
   }
 }
 
