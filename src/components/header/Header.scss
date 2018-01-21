@@ -7,16 +7,18 @@ $link-color: white;
     height: 6vh;
     margin-bottom: 2vh;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-end;  
 
     nav {
         height: 40px;
         display: flex;
         
+        
         .selected {
             border-bottom: 3px solid darken($header-active-border, 10);
             font-weight: bold;    
         }
+        
     }
     a {
         display: flex;
@@ -27,6 +29,10 @@ $link-color: white;
         box-sizing: border-box;
         border-bottom: 3px solid transparent;
         transition: border 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        margin-right: 30px;
+        &:last-of-type {
+            margin-right: 0;
+        }
     }
     
     a:first-of-type {

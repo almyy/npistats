@@ -10,7 +10,7 @@ const Header = () => {
             <div className="container">
                 <nav>
                     <NavLink to="/" exact activeClassName="selected" > Owners </NavLink>
-                    {/* <NavLink to="/stats" activeClassName="selected" > Stats </NavLink> */}
+                    <NavLink to="/stats" activeClassName="selected" > Stats </NavLink>
                 </nav>
             </div>
         </div>

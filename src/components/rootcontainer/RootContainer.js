@@ -7,6 +7,7 @@ import Header from '../header/Header';
 import Owner from '../owner/Owner';
 
 import GameList from '../game/GameList';
+import GeneralStats from '../generalstats/GeneralStats';
 
 const OwnerDetails = () => {
     return (
@@ -23,6 +24,7 @@ const RootContainer = () => {
     <div className={classNames("container", style.container)} >
         <Switch >
             <Route path="/" exact component={OwnerList} /> 
+            <Route path="/stats" component={GeneralStats} /> 
             <Route path="/owner/:ownerId" component={Owner} />
 
         </Switch>

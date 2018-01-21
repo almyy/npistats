@@ -30,13 +30,12 @@ const Owner = (props: OwnerProps)  => {
     if(loading || games.loading) return <Loader/>
     return (
         <Fragment>
-            {/* <Link to="/" >Back</Link> */}
             <div className={classNames(style.title, 'card')}> 
                 <div>
                     <h1> {ownerByOwnerId.teamNames[0]} </h1>
                     <h4> {ownerByOwnerId.ownerName} </h4>
                 </div>
-                <nav className={classNames(style.nav )}>
+                <nav className="card-nav">
                     <NavLink to={`/owner/${ownerByOwnerId.id}/`} exact activeClassName="selected"> All games </NavLink>
                     <NavLink to={`/owner/${ownerByOwnerId.id}/regularSeason`} activeClassName="selected"> Regular season </NavLink>
                     <NavLink to={`/owner/${ownerByOwnerId.id}/playOff`} activeClassName="selected"> Play Off </NavLink>
